@@ -57,8 +57,12 @@ mvn spring-boot:run
 2. Configure rules via Spring beans or external configuration files.
 3. Inject the decision engine into your services and call:
    ```java
+   DecisionRule ageRule = new DecisionRule("AgeCheck", input -> input.getAge() > 18);
    DecisionEngine engine = new DecisionEngine();
-   DecisionResult result = engine.evaluate(inputData);
+   engine.addRule(ageRule);
+   
+   DecisionResult result = engine.evaluate(new UserInput(20));
+   System.out.println(result.isApproved()); // true
    ```
 4. Extend with custom evaluators, conditions, or actions.
 
