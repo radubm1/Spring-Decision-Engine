@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Generic decision engine -->
+  <bean id="decisionEngine" class="com.example.tree.DecisionEngine">
+    <!-- Rules will be injected by a provider -->
+    <property name="rulesProvider" ref="rulesProvider"/>
+  </bean>
+
+  <!-- Rules provider: loads rules from external file -->
+  <bean id="rulesProvider" class="com.example.tree.FileRulesProvider">
+    <property name="location" value="classpath:rules.json"/>
+  </bean>
+
+</beans>
